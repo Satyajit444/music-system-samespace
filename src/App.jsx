@@ -3,10 +3,12 @@ import "./App.css";
 import Sidebar from "./components/shared/Sidebar";
 import SoundPlayer from "./components/SoundPlayer";
 import MusicList from "./components/musicTabs/MusicList";
+import axios from "axios";
 
 function App() {
   const [tab, setTab] = useState("for-you");
   const [songs, setSongs] = useState([]);
+  const [currentSong, setCurrentSong] = useState(null); // Track selected song
 
   useEffect(() => {
     axios
@@ -15,9 +17,9 @@ function App() {
       .catch((error) => console.error("Error fetching songs:", error));
   }, []);
 
-  // Filter data for "Top Tracks" and "For You"
   const topTracks = songs.filter((song) => song.top_track);
   const forYouTracks = songs.filter((song) => !song.top_track);
+
   return (
     <div className="h-[100vh] w-full flex">
       <Sidebar />
@@ -39,12 +41,16 @@ function App() {
             </button>
           </div>
           <div className="border border-red-600 w-full h-full">
-            {tab === "for-you" ? <MusicList songs={topTracks} /> : <MusicList songs={forYouTracks} />}
+            {tab === "for-you" ? (
+              <MusicList songs={forYouTracks} onSelectSong={setCurrentSong} />
+            ) : (
+              <MusicList songs={topTracks} onSelectSong={setCurrentSong} />
+            )}
           </div>
         </div>
 
         <div className="w-full border border-green-900 p-[3%]">
-          <SoundPlayer />
+          <SoundPlayer song={currentSong} /> {/* Pass current song to player */}
         </div>
       </div>
     </div>
