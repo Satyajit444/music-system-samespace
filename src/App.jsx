@@ -10,6 +10,9 @@ function App() {
   const [tab, setTab] = useState("for-you");
   const [songs, setSongs] = useState([]);
   const [currentSong, setCurrentSong] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(null);
+  const [currentSongId, setCurrentSongId] = useState(null);
+
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedAccent, setSelectedAccent] = useState("");
 
@@ -37,9 +40,11 @@ function App() {
       );
   }, [songs, tab, searchTerm]);
 
-  const handleSongClick = (song) => {
+  const handleSongClick = (song,index) => {
     setCurrentSong(song);
+    setCurrentSongId(song?.id)
     setSelectedAccent(song.accent || "#000");
+    setCurrentIndex(index);
   };
   return (
     <div
@@ -94,12 +99,12 @@ function App() {
           </div>
 
           <div className="w-full h-full overflow-auto scrollbar-hide animate-slide-left">
-            <MusicList songs={filteredSongs} onSelectSong={handleSongClick} />
+            <MusicList songs={filteredSongs} onSelectSong={handleSongClick} currentSongId={currentSongId}  />
           </div>
         </div>
 
         <div className="w-full h-full p-[3%] flex items-center justify-center animate-slide-right ">
-          <SoundPlayer song={currentSong} />
+          <SoundPlayer song={currentSong} songs={filteredSongs} songIndex={currentIndex} handleSongClick={handleSongClick}  />
         </div>
       </div>
     </div>
