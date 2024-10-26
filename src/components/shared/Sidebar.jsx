@@ -3,7 +3,7 @@ import { FaUserCircle } from "react-icons/fa";
 
 const Sidebar = () => {
   return (
-    <div className="flex flex-col justify-between h-full w-1/6 py-[3%] px-[2%]">
+    <div className="md:flex flex-col justify-between h-full w-1/6 py-[2.2%] px-[2%] hidden">
       <img
         src={
           `https://newsroom.spotify.com/wp-content/themes/ftr/assets/images/spotify-logo.png` ||

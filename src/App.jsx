@@ -11,7 +11,7 @@ function App() {
   const [songs, setSongs] = useState([]);
   const [currentSong, setCurrentSong] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedAccent, setSelectedAccent] = useState("#000");
+  const [selectedAccent, setSelectedAccent] = useState("");
 
   useEffect(() => {
     const fetchSongs = async () => {
@@ -43,7 +43,7 @@ function App() {
   };
   return (
     <div
-      className="h-[100vh] w-full flex main-wrapper text-white"
+      className="min-h-[100vh] h-full w-full flex main-wrapper text-white no-music-bg p-4 md:p-0"
       style={{
         background: `linear-gradient(135deg, ${selectedAccent}, ${selectedAccent}90 95%)`,
         backdropFilter: "blur(10px)",
@@ -51,15 +51,17 @@ function App() {
       }}
     >
       <Sidebar />
-      <div className="w-full flex">
-        <div className="flex flex-col items-start w-1/3 py-[3%]">
+      <div className="w-full flex flex-col md:flex-row">
+        <div className="flex flex-col items-start md:w-1/3  py-[3%]">
           <div className="flex justify-start w-full gap-3">
             <button
               onClick={() => {
                 setTab("for-you");
                 setSearchTerm("");
               }}
-              className={tab === "for-you" ? "font-bold" : ""}
+              className={` font-bold text-xl ${
+                tab === "for-you" ? "text-white" : "text-gray-500"
+              }`}
             >
               For You
             </button>
@@ -68,13 +70,15 @@ function App() {
                 setTab("top-tracks");
                 setSearchTerm("");
               }}
-              className={tab === "top-tracks" ? "font-bold" : ""}
+              className={`font-bold text-xl ${
+                tab === "top-tracks" ? "text-white" : "text-gray-500"
+              }`}
             >
               Top Tracks
             </button>
           </div>
           <div
-            className="py-2 px-4 mb-4 w-full rounded-md my-4 flex justify-between items-center"
+            className="py-2 px-4 mb-4 w-full rounded-md my-4 flex justify-between items-center bg-slate-800"
             style={{
               background: `linear-gradient(135deg, ${selectedAccent}, ${selectedAccent})`,
             }}
@@ -89,12 +93,12 @@ function App() {
             <FaSearch size={20} color="#777" />
           </div>
 
-          <div className="w-full h-full overflow-auto scrollbar-hide animate-slideInFromLeft">
+          <div className="w-full h-full overflow-auto scrollbar-hide animate-slide-left">
             <MusicList songs={filteredSongs} onSelectSong={handleSongClick} />
           </div>
         </div>
 
-        <div className="w-full h-full p-[3%] flex items-center justify-center">
+        <div className="w-full h-full p-[3%] flex items-center justify-center animate-slide-right ">
           <SoundPlayer song={currentSong} />
         </div>
       </div>
