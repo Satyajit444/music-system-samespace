@@ -12,7 +12,6 @@ function App() {
   const [currentSong, setCurrentSong] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(null);
   const [currentSongId, setCurrentSongId] = useState(null);
-
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedAccent, setSelectedAccent] = useState("");
 
@@ -40,12 +39,16 @@ function App() {
       );
   }, [songs, tab, searchTerm]);
 
-  const handleSongClick = (song,index) => {
+  const handleSongClick = (song, index) => {
     setCurrentSong(song);
-    setCurrentSongId(song?.id)
+    setCurrentSongId(song?.id);
     setSelectedAccent(song.accent || "#000");
     setCurrentIndex(index);
   };
+
+  const currentSongData = { currentSong, currentIndex, filteredSongs };
+  const playerControls = { handleSongClick };
+
   return (
     <div
       className="min-h-[100vh] h-full w-full flex main-wrapper text-white no-music-bg p-4 md:p-0"
@@ -97,14 +100,16 @@ function App() {
             />
             <FaSearch size={20} color="#777" />
           </div>
-
           <div className="w-full h-full overflow-auto scrollbar-hide animate-slide-left">
-            <MusicList songs={filteredSongs} onSelectSong={handleSongClick} currentSongId={currentSongId}  />
+            <MusicList
+              songs={filteredSongs}
+              onSelectSong={handleSongClick}
+              currentSongId={currentSongId}
+            />
           </div>
         </div>
-
         <div className="w-full h-full p-[3%] flex items-center justify-center animate-slide-right ">
-          <SoundPlayer song={currentSong} songs={filteredSongs} songIndex={currentIndex} handleSongClick={handleSongClick}  />
+          <SoundPlayer currentSongData={currentSongData} playerControls={playerControls} />
         </div>
       </div>
     </div>
