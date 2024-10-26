@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const MusicList = ({ songs, onSelectSong }) => {
   // State to store each song's duration
   const [durations, setDurations] = useState({});
+  const [currentSongId, setCurrentSongId] = useState(null);
 
   // Handle metadata load to capture duration
   const handleLoadedMetadata = (songId, duration) => {
@@ -21,15 +22,23 @@ const MusicList = ({ songs, onSelectSong }) => {
     return `${minutes}:${seconds}`;
   };
 
+  const handleSelectSong = (song) => {
+    setCurrentSongId(song.id);
+    onSelectSong(song);
+  };
+
   return (
     <div className="w-full">
       {songs?.length > 0 ? (
-        songs.map((song) => (
+        songs.map((song, index) => (
           <div
             key={song.id}
-            className="flex items-center justify-between p-2 cursor-pointer hover:bg-zinc-600 hover:bg-opacity-35
- rounded-md"
-            onClick={() => onSelectSong(song)}
+            className={`flex items-center justify-between p-2 cursor-pointer rounded-md ${
+              song.id === currentSongId
+                ? "bg-zinc-600 bg-opacity-35"
+                : "hover:bg-zinc-600 hover:bg-opacity-35"
+            }`}
+            onClick={() => handleSelectSong(song)}
           >
             <div className="flex items-center">
               <img
@@ -39,7 +48,7 @@ const MusicList = ({ songs, onSelectSong }) => {
               />
               <div>
                 <h4 className="text-lg font-semibold">{song.name}</h4>
-                <p className="text-sm text-gray-500">{song.artist}</p>
+                <p className="text-sm text-gray-400">{song.artist}</p>
               </div>
             </div>
             <div className="text-sm text-gray-500">

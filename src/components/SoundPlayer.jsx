@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
+import { BsThreeDots } from "react-icons/bs";
 import { FaBackward, FaForward, FaPause, FaPlay } from "react-icons/fa";
+import { MdVolumeUp } from "react-icons/md";
 
 const SoundPlayer = ({ song }) => {
   console.log("🚀 ~ SoundPlayer ~ song:", song);
@@ -32,14 +34,13 @@ const SoundPlayer = ({ song }) => {
     if (song && audioRef.current) {
       audioRef.current.src = song.url;
       audioRef.current.load();
-
       setIsPlaying(true);
       audioRef.current.play();
     }
   }, [song]);
 
   return (
-    <div className="px-8 h-full w-full max-h-[700px] max-w-[700px] overflow-auto ">
+    <div className="px-8 h-full w-full max-h-[700px] max-w-[700px] md:overflow-auto ">
       <audio ref={audioRef} controls className="hidden">
         <source src={song?.url} type="audio/mp3" />
         Your browser does not support the audio element.
@@ -48,7 +49,7 @@ const SoundPlayer = ({ song }) => {
         <h2 className="text-2xl font-semibold text-left">
           {song?.name || "song.mp3"}
         </h2>
-        <p className="text-gray-600 text-sm text-left">
+        <p className="text-gray-400 text-sm text-left">
           {song?.artist || "artist"}
         </p>
         <img
@@ -58,27 +59,35 @@ const SoundPlayer = ({ song }) => {
               : "https://cdn.pixabay.com/photo/2023/02/16/03/43/music-player-7792956_960_720.jpg"
           }
           alt="song bg"
-          className=" h-[70%] w-full mx-auto rounded-lg"
+          className=" h-[70%] w-full mx-auto my-4 rounded-lg"
         />
         <div className="mt-6  h-2 rounded-full">
           <div className="bg-teal-500 h-2 rounded-full w-1/2"></div>
         </div>
         <div
-          className={`mt-6 flex justify-center items-center ${
+          className={`mt-6 flex justify-between items-center ${
             !song && "pointer-events-none"
           }`}
         >
-          <button
-            onClick={handleNext}
-            className="p-3 rounded-full  focus:outline-none"
-          >
-            <FaBackward size={24} />
+          <button className="bg-zinc-600 bg-opacity-35 p-2 rounded-full">
+            <BsThreeDots size={24} color="white" />
           </button>
-          <button onClick={handlePlayPause} className="p-4 rounded-full ">
-            {isPlaying ? <FaPause size={24} /> : <FaPlay size={24} />}
-          </button>
-          <button onClick={handlePrev} className="p-3 rounded-full ">
-            <FaForward size={24} />
+          <div>
+            <button
+              onClick={handleNext}
+              className="p-3 rounded-full  focus:outline-none"
+            >
+              <FaBackward size={24} />
+            </button>
+            <button onClick={handlePlayPause} className="p-4 rounded-full ">
+              {isPlaying ? <FaPause size={24} /> : <FaPlay size={24} />}
+            </button>
+            <button onClick={handlePrev} className="p-3 rounded-full ">
+              <FaForward size={24} />
+            </button>
+          </div>
+          <button className="bg-zinc-600 bg-opacity-35 p-2 rounded-full">
+            <MdVolumeUp size={24} color="white" />
           </button>
         </div>
       </div>
