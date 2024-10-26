@@ -3,7 +3,7 @@ import { FaUserCircle } from "react-icons/fa";
 
 const Sidebar = () => {
   return (
-    <div className="md:flex flex-col justify-between h-full w-1/6 py-[2.2%] px-[2%] hidden">
+    <div className="md:flex flex-col justify-between h-screen w-1/6 py-[2.2%] px-[2%] hidden">
       <img
         src={
           `https://newsroom.spotify.com/wp-content/themes/ftr/assets/images/spotify-logo.png` ||
@@ -12,7 +12,9 @@ const Sidebar = () => {
         alt="spotify_logo"
         className="w-32"
       />
-      <FaUserCircle size={30} color="white" />{" "}
+      <button>
+        <FaUserCircle size={30} color="white" />{" "}
+      </button>
     </div>
   );
 };
