@@ -7,7 +7,7 @@ import axios from "axios";
 import { FaSearch } from "react-icons/fa";
 
 function App() {
-  const [tab, setTab] = useState("for-you");
+  const [isTopTracks, setIsTopTracks] = useState(false);
   const [songs, setSongs] = useState([]);
   const [currentSong, setCurrentSong] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(null);
@@ -31,13 +31,13 @@ function App() {
 
   const filteredSongs = useMemo(() => {
     return songs
-      .filter((song) => (tab === "for-you" ? song : song.top_track))
+      .filter((song) => (!isTopTracks ? song : song.top_track))
       .filter(
         (song) =>
           song.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
           song.artist.toLowerCase().includes(searchTerm.toLowerCase())
       );
-  }, [songs, tab, searchTerm]);
+  }, [songs, isTopTracks, searchTerm]);
 
   const handleSongClick = (song, index) => {
     setCurrentSong(song);
@@ -64,22 +64,22 @@ function App() {
           <div className="flex justify-start w-full gap-3">
             <button
               onClick={() => {
-                setTab("for-you");
+                setIsTopTracks(false);
                 setSearchTerm("");
               }}
-              className={` font-bold text-xl ${
-                tab === "for-you" ? "text-white" : "text-gray-500"
+              className={`font-bold text-xl ${
+                !isTopTracks ? "text-white" : "text-gray-500"
               }`}
             >
               For You
             </button>
             <button
               onClick={() => {
-                setTab("top-tracks");
+                setIsTopTracks(true);
                 setSearchTerm("");
               }}
               className={`font-bold text-xl ${
-                tab === "top-tracks" ? "text-white" : "text-gray-500"
+                isTopTracks ? "text-white" : "text-gray-500"
               }`}
             >
               Top Tracks
@@ -109,7 +109,10 @@ function App() {
           </div>
         </div>
         <div className="w-full h-full p-[3%] flex items-center justify-center animate-slide-right ">
-          <SoundPlayer currentSongData={currentSongData} playerControls={playerControls} />
+          <SoundPlayer
+            currentSongData={currentSongData}
+            playerControls={playerControls}
+          />
         </div>
       </div>
     </div>
