@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { FaBackward, FaForward, FaPause, FaPlay } from "react-icons/fa";
-import { MdVolumeUp } from "react-icons/md";
+import { MdVolumeUp, MdVolumeOff } from "react-icons/md"; // Import the Volume Off icon
 
 const SoundPlayer = ({ song }) => {
-  console.log("🚀 ~ SoundPlayer ~ song:", song);
   const audioRef = useRef(null);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(false); // State to track mute status
 
   const handlePlayPause = () => {
     setIsPlaying(!isPlaying);
@@ -30,6 +30,14 @@ const SoundPlayer = ({ song }) => {
     setIsPlaying(true);
   };
 
+  const handleMuteToggle = () => {
+    setIsMuted((prev) => {
+      const newMuteStatus = !prev;
+      audioRef.current.muted = newMuteStatus; // Mute or unmute the audio element
+      return newMuteStatus;
+    });
+  };
+
   useEffect(() => {
     if (song && audioRef.current) {
       audioRef.current.src = song.url;
@@ -45,7 +53,7 @@ const SoundPlayer = ({ song }) => {
         <source src={song?.url} type="audio/mp3" />
         Your browser does not support the audio element.
       </audio>
-      <div className=" w-full h-full">
+      <div className="w-full h-full">
         <h2 className="text-2xl font-semibold text-left">
           {song?.name || "song.mp3"}
         </h2>
@@ -59,9 +67,9 @@ const SoundPlayer = ({ song }) => {
               : "https://cdn.pixabay.com/photo/2023/02/16/03/43/music-player-7792956_960_720.jpg"
           }
           alt="song bg"
-          className=" h-[70%] w-full mx-auto my-4 rounded-lg"
+          className="h-[70%] w-full mx-auto my-4 rounded-lg"
         />
-        <div className="mt-6  h-2 rounded-full">
+        <div className="mt-6 h-2 rounded-full">
           <div className="bg-teal-500 h-2 rounded-full w-1/2"></div>
         </div>
         <div
@@ -74,20 +82,27 @@ const SoundPlayer = ({ song }) => {
           </button>
           <div>
             <button
-              onClick={handleNext}
-              className="p-3 rounded-full  focus:outline-none"
+              onClick={handlePrev}
+              className="p-3 rounded-full focus:outline-none"
             >
               <FaBackward size={24} />
             </button>
-            <button onClick={handlePlayPause} className="p-4 rounded-full ">
+            <button onClick={handlePlayPause} className="p-4 rounded-full">
               {isPlaying ? <FaPause size={24} /> : <FaPlay size={24} />}
             </button>
-            <button onClick={handlePrev} className="p-3 rounded-full ">
+            <button onClick={handleNext} className="p-3 rounded-full">
               <FaForward size={24} />
             </button>
           </div>
-          <button className="bg-zinc-600 bg-opacity-35 p-2 rounded-full">
-            <MdVolumeUp size={24} color="white" />
+          <button
+            onClick={handleMuteToggle} // Attach the mute toggle function
+            className="bg-zinc-600 bg-opacity-35 p-2 rounded-full"
+          >
+            {isMuted ? (
+              <MdVolumeOff size={24} color="white" />
+            ) : (
+              <MdVolumeUp size={24} color="white" />
+            )}
           </button>
         </div>
       </div>
