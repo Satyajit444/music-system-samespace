@@ -12,7 +12,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get('https://cms.samespace.com/items/songs')
+      .get("https://cms.samespace.com/items/songs")
       .then((response) => setSongs(response.data.data))
       .catch((error) => console.error("Error fetching songs:", error));
   }, []);
@@ -50,7 +50,7 @@ function App() {
         </div>
 
         <div className="w-full border border-green-900 p-[3%]">
-          <SoundPlayer song={currentSong} /> {/* Pass current song to player */}
+          <SoundPlayer song={currentSong} />
         </div>
       </div>
     </div>

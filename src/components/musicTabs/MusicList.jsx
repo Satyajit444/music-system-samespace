@@ -1,31 +1,57 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const MusicList = ({ songs, onSelectSong }) => {
+  // State to store each song's duration
+  const [durations, setDurations] = useState({});
+
+  // Handle metadata load to capture duration
+  const handleLoadedMetadata = (songId, duration) => {
+    setDurations((prevDurations) => ({
+      ...prevDurations,
+      [songId]: duration,
+    }));
+  };
+
+  // Helper function to format time in MM:SS
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60).toString().padStart(2, '0');
+    return `${minutes}:${seconds}`;
+  };
+
   return (
-    <ul className="space-y-4">
+    <div className="w-full">
       {songs.map((song) => (
-        <li
+        <div
           key={song.id}
-          className="flex items-center p-4 bg-gray-800 rounded-lg shadow-lg cursor-pointer"
-          onClick={() => onSelectSong(song)} // Set the current song
+          className="flex items-center justify-between p-4 border-b border-gray-300 cursor-pointer hover:bg-gray-200"
+          onClick={() => onSelectSong(song)}
         >
-          <div
-            className="w-16 h-16 rounded-md overflow-hidden mr-4 flex-shrink-0"
-            style={{ backgroundColor: song.accent }}
-          >
+          <div className="flex items-center">
             <img
               src={`https://cms.samespace.com/assets/${song.cover}`}
               alt={song.name}
-              className="w-full h-full object-cover"
+              className="w-12 h-12 mr-4 rounded-md"
             />
+            <div>
+              <h4 className="text-lg font-semibold">{song.name}</h4>
+              <p className="text-sm text-gray-500">{song.artist}</p>
+            </div>
           </div>
-          <div className="flex flex-col flex-grow">
-            <span className="text-xl font-semibold">{song.name}</span>
-            <span className="text-sm text-gray-400">{song.artist}</span>
+          <div className="text-sm text-gray-500">
+            {/* Show duration if available, otherwise loading */}
+            {durations[song.id] ? formatTime(durations[song.id]) : 'Loading...'}
           </div>
-        </li>
+
+          {/* Hidden audio element to get duration */}
+          <audio
+            src={song.url}
+            onLoadedMetadata={(e) => handleLoadedMetadata(song.id, e.target.duration)}
+            className="hidden"
+          />
+        </div>
       ))}
-    </ul>
+    </div>
   );
 };
 
