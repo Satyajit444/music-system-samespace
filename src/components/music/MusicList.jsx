@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useMusic } from "../../context/MusicContext";
 
-const MusicList = ({ songs, onSelectSong, currentSongId }) => {
+const MusicList = ({}) => {
+  const { filteredSongs, currentSongId, handleSongClick } = useMusic();
   const [durations, setDurations] = useState({});
 
   const handleLoadedMetadata = (songId, duration) => {
@@ -20,8 +22,8 @@ const MusicList = ({ songs, onSelectSong, currentSongId }) => {
 
   return (
     <div className="w-full">
-      {songs?.length > 0 ? (
-        songs.map((song, index) => (
+      {filteredSongs?.length > 0 ? (
+        filteredSongs.map((song, index) => (
           <div
             key={song.id}
             className={`flex items-center justify-between p-2 cursor-pointer rounded-md ${
@@ -29,7 +31,7 @@ const MusicList = ({ songs, onSelectSong, currentSongId }) => {
                 ? "bg-zinc-600 bg-opacity-35"
                 : "hover:bg-zinc-600 hover:bg-opacity-35"
             }`}
-            onClick={() => onSelectSong(song, index)}
+            onClick={() => handleSongClick(song, index)}
           >
             <div className="flex items-center">
               <img

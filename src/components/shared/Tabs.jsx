@@ -1,8 +1,9 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
+import { useMusic } from "../../context/MusicContext";
 
-const Tabs = ({ tabData }) => {
-  const { isTopTracks, setIsTopTracks, searchTerm, setSearchTerm } = tabData;
+const Tabs = () => {
+  const { searchTerm, isTopTracks, setIsTopTracks, setSearchTerm } = useMusic();
   return (
     <>
       <div className="flex justify-start w-full gap-3">
