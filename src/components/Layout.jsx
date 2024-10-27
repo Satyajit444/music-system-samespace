@@ -2,13 +2,13 @@ import React from "react";
 import { useMusic } from "../context/MusicContext";
 import HomePage from "./HomePage";
 import Sidebar from "./shared/Sidebar";
-
+import style from "./main.module.css";
 const MainLayout = () => {
   const { selectedAccent } = useMusic();
 
   return (
     <div
-      className="min-h-[100vh] w-full flex main-wrapper text-white no-music-bg p-4 md:p-0"
+      className={`${style["main-layout"]} main-wrapper`}
       style={{
         background: `linear-gradient(135deg, ${selectedAccent}, ${selectedAccent}90 95%)`,
         backdropFilter: "blur(10px)",

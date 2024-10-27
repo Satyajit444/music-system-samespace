@@ -24,7 +24,7 @@ const HomePage = () => {
           <MusicList />
         </div>
       </div>
-      <div className={style["music-player-ctn"]}>
+      <div className={`${style["music-player-ctn"]} animate-slide-right`}>
         <MusicPlayer
           currentSongData={currentSongData}
           playerControls={handleSongClick}
