@@ -68,7 +68,7 @@ const MusicPlayer = () => {
         ref={audioRef}
         controls
         className="hidden"
-        onTimeUpdate={() => setCurrentTime(audioRef.current.currentTime)}
+        onTimeUpdate={() => setCurrentTime(audioRef?.current.currentTime)}
       >
         {currentSong && <source src={currentSong.url} type="audio/mp3" />}
       </audio>
@@ -95,7 +95,7 @@ const MusicPlayer = () => {
             max={duration}
             value={currentTime}
             onChange={handleSliderChange}
-            className="custom-slider mx-2 flex-grow"
+            className={`${style["music-input-range"]} custom-slider`}
           />
         </div>
 

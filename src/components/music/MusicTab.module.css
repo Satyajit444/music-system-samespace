@@ -7,6 +7,9 @@
 .progress-bar {
   @apply w-full flex items-center mt-4;
 }
+.music-input-range {
+  @apply mx-2 flex-grow cursor-pointer;
+}
 .action-ctn {
   @apply mt-6 flex justify-between items-center;
 }

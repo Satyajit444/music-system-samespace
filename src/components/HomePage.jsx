@@ -6,8 +6,6 @@ import { useMusic } from "../context/MusicContext";
 import style from "./main.module.css";
 
 const HomePage = () => {
-
-
   const { filteredSongs, currentSong, currentIndex, handleSongClick } =
     useMusic();
 
