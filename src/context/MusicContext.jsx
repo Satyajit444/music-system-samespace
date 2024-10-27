@@ -39,7 +39,7 @@ export const MusicProvider = ({ children }) => {
   const handleSongClick = (song, index) => {
     setCurrentSong(song);
     setCurrentSongId(song?.id);
-    setSelectedAccent(song.accent || "#000");
+    setSelectedAccent(song.accent);
     setCurrentIndex(index);
   };
 

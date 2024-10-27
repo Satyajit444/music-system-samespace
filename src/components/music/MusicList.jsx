@@ -21,12 +21,12 @@ const MusicList = ({}) => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full flex flex-col gap-2">
       {filteredSongs?.length > 0 ? (
         filteredSongs.map((song, index) => (
           <div
             key={song.id}
-            className={`flex items-center justify-between p-2 cursor-pointer rounded-md ${
+            className={`flex items-center justify-between p-2 cursor-pointer rounded-md  ${
               song.id === currentSongId
                 ? "bg-zinc-600 bg-opacity-35"
                 : "hover:bg-zinc-600 hover:bg-opacity-35"
@@ -40,8 +40,8 @@ const MusicList = ({}) => {
                 className="w-12 h-12 mr-4 rounded-full"
               />
               <div>
-                <h4 className="text-lg font-semibold">{song.name}</h4>
-                <p className="text-sm text-gray-400">{song.artist}</p>
+                <h4 className="text-md font-semibold">{song.name}</h4>
+                <p className="text-xs text-gray-400">{song.artist}</p>
               </div>
             </div>
             <div className="text-sm text-gray-500">
