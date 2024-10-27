@@ -1,9 +1,10 @@
 import React from "react";
 import { FaUserCircle } from "react-icons/fa";
+import style from "./shared.module.css";
 
 const Sidebar = () => {
   return (
-    <div className="md:flex flex-col justify-between h-screen w-1/6 py-[2.2%] px-[2%] hidden">
+    <div className={style["sidebar-ctn"]}>
       <img
         src={
           `https://newsroom.spotify.com/wp-content/themes/ftr/assets/images/spotify-logo.png` ||

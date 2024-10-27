@@ -1,12 +1,13 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
 import { useMusic } from "../../context/MusicContext";
+import style from "./shared.module.css";
 
 const Tabs = () => {
   const { searchTerm, isTopTracks, setIsTopTracks, setSearchTerm } = useMusic();
   return (
     <>
-      <div className="flex justify-start w-full gap-3">
+      <div className={style["tab-ctn"]}>
         <button
           onClick={() => {
             setIsTopTracks(false);
@@ -30,7 +31,7 @@ const Tabs = () => {
           Top Tracks
         </button>
       </div>
-      <div className="py-2 px-4 mb-4 w-full rounded-md my-4 flex justify-between items-center bg-neutral-800">
+      <div className={style["search-bar-ctn"]}>
         <input
           type="text"
           placeholder="Search Song, Artist ..."
