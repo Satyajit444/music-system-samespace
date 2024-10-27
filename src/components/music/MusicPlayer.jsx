@@ -11,6 +11,7 @@ const MusicPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   const handlePlayPause = () => {
     if (!currentSong) return;
@@ -28,7 +29,11 @@ const MusicPlayer = () => {
     handleSongClick(filteredSongs[nextIndex], nextIndex);
     setIsPlaying(true);
   };
-
+  const handleSliderChange = (e) => {
+    const newTime = e.target.value;
+    audioRef.current.currentTime = newTime;
+    setCurrentTime(newTime);
+  };
   const handlePrev = () => {
     if (!currentSong) return;
     const prevIndex =
@@ -50,6 +55,9 @@ const MusicPlayer = () => {
       audioRef.current.load();
       audioRef.current.play();
       setIsPlaying(true);
+      audioRef.current.onloadedmetadata = () => {
+        setDuration(audioRef.current.duration);
+      };
     }
     return () => audioEl.removeEventListener("ended", handleNext);
   }, [currentSong]);
@@ -81,16 +89,17 @@ const MusicPlayer = () => {
           alt="song_bg"
           className="h-[400px] w-full mx-auto my-4 rounded-lg object-cover"
         />
-        <div className="w-full h-2 bg-gray-700 rounded-full mt-6">
-          <div
-            className="h-2 bg-white rounded-full"
-            style={{
-              width: `${
-                (currentTime / (audioRef.current?.duration || 1)) * 100
-              }%`,
-            }}
-          ></div>
+        <div className="w-full flex items-center mt-4">
+          <input
+            type="range"
+            min="0"
+            max={duration}
+            value={currentTime}
+            onChange={handleSliderChange}
+            className="custom-slider mx-2 flex-grow"
+          />
         </div>
+
         <div className="mt-6 flex justify-between items-center">
           <button className="bg-zinc-600 bg-opacity-35 p-2 rounded-full">
             <BsThreeDots size={24} color="white" />

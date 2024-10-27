@@ -1,9 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useMusic } from "../../context/MusicContext";
 
-const MusicList = ({}) => {
+const MusicList = () => {
   const { filteredSongs, currentSongId, handleSongClick } = useMusic();
   const [durations, setDurations] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (filteredSongs.length > 0) {
+      setLoading(false);
+    }
+  }, [filteredSongs]);
 
   const handleLoadedMetadata = (songId, duration) => {
     setDurations((prevDurations) => ({
@@ -22,11 +29,28 @@ const MusicList = ({}) => {
 
   return (
     <div className="w-full flex flex-col gap-2">
-      {filteredSongs?.length > 0 ? (
+      {loading ? (
+        // Display skeleton loaders while loading
+        Array.from({ length: 5 }).map((_, index) => (
+          <div
+            key={index}
+            className="flex items-center justify-between p-2 rounded-md bg-gray-800"
+          >
+            <div className="flex items-center">
+              <div className="h-12 w-12 bg-gray-700 rounded-full animate-pulse mr-4"></div>
+              <div>
+                <div className="h-4 w-32 bg-gray-700 rounded animate-pulse mb-2"></div>
+                <div className="h-3 w-24 bg-gray-600 rounded animate-pulse"></div>
+              </div>
+            </div>
+            <div className="h-4 w-12 bg-gray-700 rounded animate-pulse"></div>
+          </div>
+        ))
+      ) : filteredSongs.length > 0 ? (
         filteredSongs.map((song, index) => (
           <div
             key={song.id}
-            className={`flex items-center justify-between p-2 cursor-pointer rounded-md  ${
+            className={`flex items-center justify-between p-2 cursor-pointer rounded-md ${
               song.id === currentSongId
                 ? "bg-zinc-600 bg-opacity-35"
                 : "hover:bg-zinc-600 hover:bg-opacity-35"
@@ -44,10 +68,12 @@ const MusicList = ({}) => {
                 <p className="text-xs text-gray-400">{song.artist}</p>
               </div>
             </div>
-            <div className="text-sm text-gray-500">
-              {durations[song.id]
-                ? formatTime(durations[song.id])
-                : "Loading..."}
+            <div className="text-sm text-gray-300">
+              {durations[song.id] ? (
+                formatTime(durations[song.id])
+              ) : (
+                <div className="h-4 w-12 bg-gray-700 rounded animate-pulse"></div>
+              )}
             </div>
 
             <audio
@@ -60,7 +86,7 @@ const MusicList = ({}) => {
           </div>
         ))
       ) : (
-        <div className="p-4 text-center text-gray-500">No songs found</div>
+        <div className="p-4 text-center text-gray-300">No songs found</div>
       )}
     </div>
   );
