@@ -3,7 +3,7 @@ import { BsThreeDots } from "react-icons/bs";
 import { FaBackward, FaForward, FaPause, FaPlay } from "react-icons/fa";
 import { MdVolumeUp, MdVolumeOff } from "react-icons/md";
 
-const SoundPlayer = ({ currentSongData, playerControls }) => {
+const MusicPlayer = ({ currentSongData, playerControls }) => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -111,4 +111,4 @@ const SoundPlayer = ({ currentSongData, playerControls }) => {
   );
 };
 
-export default SoundPlayer;
+export default MusicPlayer;

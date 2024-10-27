@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 import Sidebar from "./components/shared/Sidebar";
-import SoundPlayer from "./components/SoundPlayer";
+import MusicPlayer from "./components/MusicPlayer";
 import MusicList from "./components/musicTabs/MusicList";
 import axios from "axios";
 import { FaSearch } from "react-icons/fa";
@@ -109,7 +109,7 @@ function App() {
           </div>
         </div>
         <div className="w-full h-full p-[3%] flex items-center justify-center animate-slide-right ">
-          <SoundPlayer
+          <MusicPlayer
             currentSongData={currentSongData}
             playerControls={playerControls}
           />
