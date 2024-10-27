@@ -1,15 +1,12 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Tabs from "./shared/Tabs";
 import MusicList from "./music/MusicList";
 import MusicPlayer from "./music/MusicPlayer";
 import { useMusic } from "../context/MusicContext";
 import style from "./main.module.css";
-// import useMedia from "use-media";
 
 const HomePage = () => {
-  // const isSmall = useMedia({ maxWidth: "600px" });
-  // const isMedium = useMedia({ minWidth: "601px", maxWidth: "1024px" });
-  // const isLarge = useMedia({ minWidth: "1025px" });
+
 
   const { filteredSongs, currentSong, currentIndex, handleSongClick } =
     useMusic();
