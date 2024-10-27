@@ -1,12 +1,12 @@
 import React from "react";
 import "./App.css";
 import { MusicProvider } from "./context/MusicContext";
-import MainLayout from "./components/Layout";
+import Layout from "./components/Layout";
 
 function App() {
   return (
     <MusicProvider>
-      <MainLayout />
+      <Layout />
     </MusicProvider>
   );
 }

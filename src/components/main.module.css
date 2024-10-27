@@ -8,7 +8,7 @@
   @apply w-full h-full overflow-auto scrollbar-hide;
 }
 .music-player-ctn {
-  @apply w-full h-full md:p-[3%] pt-[5%] flex items-center justify-center ;
+  @apply w-full h-full md:p-[3%] md:pt-[5%] flex items-center justify-center ;
 }
 .main-layout {
   @apply min-h-[100vh] w-full flex text-white p-4 md:p-0;

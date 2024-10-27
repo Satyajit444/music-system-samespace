@@ -103,15 +103,22 @@ const MusicPlayer = () => {
           <button className={style["side-action-btn"]}>
             <BsThreeDots size={24} color="white" />
           </button>
-          <div>
+          <div className="flex gap-x-4">
             <button
               onClick={handlePrev}
               className="p-3 rounded-full focus:outline-none"
             >
               <FaBackward size={24} />
             </button>
-            <button onClick={handlePlayPause} className="p-4 rounded-full">
-              {isPlaying ? <FaPause size={24} /> : <FaPlay size={24} />}
+            <button
+              onClick={handlePlayPause}
+              className="p-3 rounded-full bg-white"
+            >
+              {isPlaying ? (
+                <FaPause size={24} color="#333" />
+              ) : (
+                <FaPlay size={24} color="#333" />
+              )}
             </button>
             <button onClick={handleNext} className="p-3 rounded-full">
               <FaForward size={24} />

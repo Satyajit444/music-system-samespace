@@ -41,3 +41,39 @@ body,
 .animate-slide-right {
   animation: slideInFromRight 0.5s ease forwards;
 }
+/* Custom styling for the slider */
+.custom-slider {
+  -webkit-appearance: none; /* Remove default styling */
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.3); /* Set background color with opacity */
+  outline: none;
+  height: 6px; /* Adjust height as needed */
+  border-radius: 5px;
+}
+
+/* Track styling */
+.custom-slider::-webkit-slider-runnable-track {
+  background: rgba(255, 255, 255, 0.3); /* Background color with reduced opacity */
+  border-radius: 5px;
+  height: 6px; /* Adjust height */
+}
+
+/* Thumb styling */
+.custom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px; /* Width of the thumb */
+  height: 12px; /* Height of the thumb */
+  background: white; /* White color for the thumb */
+  border-radius: 50%; /* Make it round */
+  cursor: pointer;
+  margin-top: -3px; /* Center the thumb */
+}
+
+.custom-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+}

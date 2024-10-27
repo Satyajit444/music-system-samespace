@@ -3,7 +3,7 @@ import { useMusic } from "../context/MusicContext";
 import HomePage from "./HomePage";
 import Sidebar from "./shared/Sidebar";
 import style from "./main.module.css";
-const MainLayout = () => {
+const Layout = () => {
   const { selectedAccent } = useMusic();
 
   return (
@@ -21,4 +21,4 @@ const MainLayout = () => {
   );
 };
 
-export default MainLayout;
+export default Layout;
