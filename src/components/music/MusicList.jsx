@@ -30,7 +30,6 @@ const MusicList = () => {
   return (
     <div className={style["list-ctn"]}>
       {loading ? (
-        // Display skeleton loaders while loading
         Array.from({ length: 5 }).map((_, index) => (
           <div key={index} className={style["skeleton-ctn"]}>
             <div className="flex items-center">
@@ -58,7 +57,7 @@ const MusicList = () => {
               <img
                 src={`https://cms.samespace.com/assets/${song.cover}`}
                 alt={song.name}
-                className="w-12 h-12 mr-4 rounded-full"
+                className={style["image-bg"]}
               />
               <div>
                 <h4 className="text-md font-semibold">{song.name}</h4>
@@ -83,7 +82,7 @@ const MusicList = () => {
           </div>
         ))
       ) : (
-        <div className="p-4 text-center text-gray-300">No songs found</div>
+        <div className={style["no-songs"]}>No songs found</div>
       )}
     </div>
   );

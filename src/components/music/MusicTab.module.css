@@ -13,6 +13,9 @@
 .side-action-btn {
   @apply bg-zinc-600 bg-opacity-35 p-2 rounded-full;
 }
+.image-bg {
+  @apply w-12 h-12 mr-4 rounded-full;
+}
 .list-ctn {
   @apply w-full flex flex-col gap-2;
 }
@@ -36,4 +39,7 @@
 }
 .list-child {
   @apply flex items-center justify-between p-2 cursor-pointer rounded-md;
+}
+.no-songs {
+  @apply p-4 text-center text-gray-300;
 }

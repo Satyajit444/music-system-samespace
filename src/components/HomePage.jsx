@@ -3,6 +3,7 @@ import Tabs from "./shared/Tabs";
 import MusicList from "./music/MusicList";
 import MusicPlayer from "./music/MusicPlayer";
 import { useMusic } from "../context/MusicContext";
+import style from "./main.module.css";
 // import useMedia from "use-media";
 
 const HomePage = () => {
@@ -16,14 +17,14 @@ const HomePage = () => {
   const currentSongData = { currentSong, currentIndex, filteredSongs };
 
   return (
-    <div className="flex md:flex-row flex-col-reverse items-start justify-between w-full h-full">
-      <div className="flex flex-col items-start md:w-1/3 w-full py-[3%]">
+    <div className={style["main-container"]}>
+      <div className={style["tab-list-ctn"]}>
         <Tabs />
-        <div className="w-full h-full overflow-auto scrollbar-hide animate-slide-left">
+        <div className={`${style["music-list-ctn"]} animate-slide-left`}>
           <MusicList />
         </div>
       </div>
-      <div className="w-full h-full md:p-[3%] pt-[5%] flex items-center justify-center animate-slide-right">
+      <div className={style["music-player-ctn"]}>
         <MusicPlayer
           currentSongData={currentSongData}
           playerControls={handleSongClick}

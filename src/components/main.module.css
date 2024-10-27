@@ -1,0 +1,12 @@
+.main-container {
+  @apply flex md:flex-row flex-col-reverse items-start justify-between w-full h-full;
+}
+.tab-list-ctn {
+  @apply flex flex-col items-start md:w-1/3 w-full py-[3%];
+}
+.music-list-ctn {
+  @apply w-full h-full overflow-auto scrollbar-hide;
+}
+.music-player-ctn {
+  @apply w-full h-full md:p-[3%] pt-[5%] flex items-center justify-center animate-slide-right;
+}
