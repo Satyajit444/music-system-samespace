@@ -4,7 +4,7 @@ import Sidebar from "./components/shared/Sidebar";
 import MusicPlayer from "./components/MusicPlayer";
 import MusicList from "./components/musicTabs/MusicList";
 import axios from "axios";
-import { FaSearch } from "react-icons/fa";
+import Tabs from "./components/musicTabs/Tabs";
 
 function App() {
   const [isTopTracks, setIsTopTracks] = useState(false);
@@ -47,11 +47,11 @@ function App() {
   };
 
   const currentSongData = { currentSong, currentIndex, filteredSongs };
-  const playerControls = { handleSongClick };
+  const tabData = { isTopTracks, setIsTopTracks, setSearchTerm, searchTerm };
 
   return (
     <div
-      className="min-h-[100vh] h-full w-full flex main-wrapper text-white no-music-bg p-4 md:p-0"
+      className="min-h-[100vh] w-full flex main-wrapper text-white no-music-bg p-4 md:p-0"
       style={{
         background: `linear-gradient(135deg, ${selectedAccent}, ${selectedAccent}90 95%)`,
         backdropFilter: "blur(10px)",
@@ -61,45 +61,7 @@ function App() {
       <Sidebar />
       <div className="w-full flex flex-col md:flex-row">
         <div className="flex flex-col items-start md:w-1/3  py-[3%]">
-          <div className="flex justify-start w-full gap-3">
-            <button
-              onClick={() => {
-                setIsTopTracks(false);
-                setSearchTerm("");
-              }}
-              className={`font-bold text-xl ${
-                !isTopTracks ? "text-white" : "text-gray-500"
-              }`}
-            >
-              For You
-            </button>
-            <button
-              onClick={() => {
-                setIsTopTracks(true);
-                setSearchTerm("");
-              }}
-              className={`font-bold text-xl ${
-                isTopTracks ? "text-white" : "text-gray-500"
-              }`}
-            >
-              Top Tracks
-            </button>
-          </div>
-          <div
-            className="py-2 px-4 mb-4 w-full rounded-md my-4 flex justify-between items-center bg-slate-800"
-            style={{
-              background: `linear-gradient(135deg, ${selectedAccent}, ${selectedAccent})`,
-            }}
-          >
-            <input
-              type="text"
-              placeholder="Search Song, Artist ..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="bg-transparent outline-none"
-            />
-            <FaSearch size={20} color="#777" />
-          </div>
+          <Tabs tabData={tabData} />
           <div className="w-full h-full overflow-auto scrollbar-hide animate-slide-left">
             <MusicList
               songs={filteredSongs}
@@ -111,7 +73,7 @@ function App() {
         <div className="w-full h-full p-[3%] flex items-center justify-center animate-slide-right ">
           <MusicPlayer
             currentSongData={currentSongData}
-            playerControls={playerControls}
+            playerControls={handleSongClick}
           />
         </div>
       </div>

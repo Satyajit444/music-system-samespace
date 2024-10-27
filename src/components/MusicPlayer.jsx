@@ -58,7 +58,7 @@ const MusicPlayer = ({ currentSongData, playerControls }) => {
   }, [currentSong]);
 
   return (
-    <div className="px-8 h-full w-full max-h-[700px] max-w-[700px] md:overflow-auto">
+    <div className="px-8 h-full w-full max-h-[700px] max-w-[700px]">
       <audio ref={audioRef} controls className="hidden" onTimeUpdate={onTimeUpdate}>
         {currentSong && <source src={currentSong.url} type="audio/mp3" />}
         Your browser does not support the audio element.
@@ -73,11 +73,11 @@ const MusicPlayer = ({ currentSongData, playerControls }) => {
         <img
           src={
             currentSong?.cover
-              ? `https://cms.samespace.com/assets/${currentSong.cover}`
+              ? `https://cms.samespace.com/assets/${currentSong?.cover}`
               : "https://cdn.pixabay.com/photo/2023/02/16/03/43/music-player-7792956_960_720.jpg"
           }
-          alt="song bg"
-          className="h-[70%] w-full mx-auto my-4 rounded-lg"
+          alt="song_bg"
+          className="md:h-[70%] h-[400px] w-full mx-auto my-4 rounded-lg object-cover"
         />
         <div className="w-full h-2 bg-gray-700 rounded-full mt-6">
           <div
