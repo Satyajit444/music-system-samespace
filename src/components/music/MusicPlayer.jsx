@@ -3,7 +3,7 @@ import { BsThreeDots } from "react-icons/bs";
 import { FaBackward, FaForward, FaPause, FaPlay } from "react-icons/fa";
 import { MdVolumeUp, MdVolumeOff } from "react-icons/md";
 import { useMusic } from "../../context/MusicContext";
-
+import style from "./MusicTab.module.css";
 const MusicPlayer = () => {
   const audioRef = useRef(null);
   const { filteredSongs, currentSong, currentIndex, handleSongClick } =
@@ -63,7 +63,7 @@ const MusicPlayer = () => {
   }, [currentSong]);
 
   return (
-    <div className="px-8 h-full w-full max-h-[700px] max-w-[700px]">
+    <div className={style["player-controller"]}>
       <audio
         ref={audioRef}
         controls
@@ -71,7 +71,6 @@ const MusicPlayer = () => {
         onTimeUpdate={() => setCurrentTime(audioRef.current.currentTime)}
       >
         {currentSong && <source src={currentSong.url} type="audio/mp3" />}
-        Your browser does not support the audio element.
       </audio>
       <div className="w-full h-full">
         <h2 className="text-2xl font-semibold text-left">
@@ -87,9 +86,9 @@ const MusicPlayer = () => {
               : "https://cdn.pixabay.com/photo/2023/02/16/03/43/music-player-7792956_960_720.jpg"
           }
           alt="song_bg"
-          className="h-[400px] w-full mx-auto my-4 rounded-lg object-cover"
+          className={style["player-image"]}
         />
-        <div className="w-full flex items-center mt-4">
+        <div className={style["progress-bar"]}>
           <input
             type="range"
             min="0"
@@ -100,8 +99,8 @@ const MusicPlayer = () => {
           />
         </div>
 
-        <div className="mt-6 flex justify-between items-center">
-          <button className="bg-zinc-600 bg-opacity-35 p-2 rounded-full">
+        <div className={style["action-ctn"]}>
+          <button className={style["side-action-btn"]}>
             <BsThreeDots size={24} color="white" />
           </button>
           <div>
@@ -120,7 +119,7 @@ const MusicPlayer = () => {
           </div>
           <button
             onClick={handleMuteToggle}
-            className="bg-zinc-600 bg-opacity-35 p-2 rounded-full"
+            className={style["side-action-btn"]}
           >
             {isMuted ? <MdVolumeOff size={24} /> : <MdVolumeUp size={24} />}
           </button>

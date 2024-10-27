@@ -3,12 +3,12 @@ import Tabs from "./shared/Tabs";
 import MusicList from "./music/MusicList";
 import MusicPlayer from "./music/MusicPlayer";
 import { useMusic } from "../context/MusicContext";
-import useMedia from "use-media";
+// import useMedia from "use-media";
 
 const HomePage = () => {
-  const isSmall = useMedia({ maxWidth: "600px" });
-  const isMedium = useMedia({ minWidth: "601px", maxWidth: "1024px" });
-  const isLarge = useMedia({ minWidth: "1025px" });
+  // const isSmall = useMedia({ maxWidth: "600px" });
+  // const isMedium = useMedia({ minWidth: "601px", maxWidth: "1024px" });
+  // const isLarge = useMedia({ minWidth: "1025px" });
 
   const { filteredSongs, currentSong, currentIndex, handleSongClick } =
     useMusic();
@@ -23,7 +23,7 @@ const HomePage = () => {
           <MusicList />
         </div>
       </div>
-      <div className="w-full h-full p-[3%] pt-[5%] flex items-center justify-center animate-slide-right">
+      <div className="w-full h-full md:p-[3%] pt-[5%] flex items-center justify-center animate-slide-right">
         <MusicPlayer
           currentSongData={currentSongData}
           playerControls={handleSongClick}

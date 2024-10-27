@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useMusic } from "../../context/MusicContext";
-
+import style from "./MusicTab.module.css";
 const MusicList = () => {
   const { filteredSongs, currentSongId, handleSongClick } = useMusic();
   const [durations, setDurations] = useState({});
@@ -28,29 +28,26 @@ const MusicList = () => {
   };
 
   return (
-    <div className="w-full flex flex-col gap-2">
+    <div className={style["list-ctn"]}>
       {loading ? (
         // Display skeleton loaders while loading
         Array.from({ length: 5 }).map((_, index) => (
-          <div
-            key={index}
-            className="flex items-center justify-between p-2 rounded-md bg-gray-800"
-          >
+          <div key={index} className={style["skeleton-ctn"]}>
             <div className="flex items-center">
-              <div className="h-12 w-12 bg-gray-700 rounded-full animate-pulse mr-4"></div>
+              <div className={style["skeleton-main"]}></div>
               <div>
-                <div className="h-4 w-32 bg-gray-700 rounded animate-pulse mb-2"></div>
-                <div className="h-3 w-24 bg-gray-600 rounded animate-pulse"></div>
+                <div className={style["skeleton-child"]}></div>
+                <div className={style["skeleton-sub-child"]}></div>
               </div>
             </div>
-            <div className="h-4 w-12 bg-gray-700 rounded animate-pulse"></div>
+            <div className={style["skeleton-ruler"]}></div>
           </div>
         ))
       ) : filteredSongs.length > 0 ? (
         filteredSongs.map((song, index) => (
           <div
             key={song.id}
-            className={`flex items-center justify-between p-2 cursor-pointer rounded-md ${
+            className={` ${style["list-child"]} ${
               song.id === currentSongId
                 ? "bg-zinc-600 bg-opacity-35"
                 : "hover:bg-zinc-600 hover:bg-opacity-35"
@@ -72,7 +69,7 @@ const MusicList = () => {
               {durations[song.id] ? (
                 formatTime(durations[song.id])
               ) : (
-                <div className="h-4 w-12 bg-gray-700 rounded animate-pulse"></div>
+                <div className={style["skeleton-duration"]}></div>
               )}
             </div>
 

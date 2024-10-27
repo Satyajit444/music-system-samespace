@@ -13,7 +13,7 @@ const Tabs = () => {
             setSearchTerm("");
           }}
           className={`font-bold text-xl ${
-            !isTopTracks ? "text-white" : "text-gray-500"
+            !isTopTracks ? "text-white" : "opacity-50"
           }`}
         >
           For You
@@ -24,7 +24,7 @@ const Tabs = () => {
             setSearchTerm("");
           }}
           className={`font-bold text-xl ${
-            isTopTracks ? "text-white" : "text-gray-500"
+            isTopTracks ? "text-white" : "opacity-50"
           }`}
         >
           Top Tracks
