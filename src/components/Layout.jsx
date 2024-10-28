@@ -12,7 +12,7 @@ const Layout = () => {
       style={{
         background: `linear-gradient(135deg, ${selectedAccent}, ${selectedAccent}90 95%)`,
         backdropFilter: "blur(10px)",
-        opacity: 0.8,
+        opacity: 1,
       }}
     >
       <Sidebar />
